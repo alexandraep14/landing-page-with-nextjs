@@ -3,6 +3,7 @@ import styles from '@/styles/Clients.module.scss'
 import type { AppProps } from 'next/app'
 import Head from "next/head";
 import Link from "next/link";
+import Navigation from "@/components/Navigation";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <>
@@ -12,10 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <title>Business</title>
     </Head>
-    <nav>
-      <Link href={'/'}>Home</Link>
-      <Link href={'/clients'}>Clients</Link>
-    </nav>
+    <Navigation />
 
     <main style={{minHeight: "100vh"}}>
       <Component {...pageProps} />

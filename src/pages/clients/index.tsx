@@ -2,10 +2,21 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Clients.module.scss'
+import {useEffect, useState} from "react";
+import {ClientData} from "@/types";
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Clients() {
+
+    const [clients, setClients] = useState<ClientData[]>([]);
+
+    useEffect(() => {
+        fetch("/api/clients")
+            .then(res => res.json())
+            .then(data => setClients(data));
+    }, [])
+
     return (
         <>
             <Head>
@@ -15,10 +26,28 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
-                Hello
-                <div className={styles.clientItem}>
-                    Client 1
-                </div>
+                {
+                   clients.map(
+                       (client, index)  => <a
+                           key={index}
+                           href={`/clients/${client.id}`}
+                       >
+                           <div className={styles.clientItem}>
+                               <h2>{client.name}</h2>
+                               {client.age}, ID={client.id}
+                           </div>
+                       </a>
+                   )
+                }
+
+                {/*<div className={styles.clientItem}>*/}
+                {/*    <h2>John Doe</h2>*/}
+                {/*    22, ID=1*/}
+                {/*</div>*/}
+                {/*<div className={styles.clientItem}>*/}
+                {/*    <h2>John Doe</h2>*/}
+                {/*    22, ID=1*/}
+                {/*</div>*/}
             </main>
         </>
     )
