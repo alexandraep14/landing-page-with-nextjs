@@ -9,7 +9,7 @@ import {PageProps} from "@/reducers/stateReducer";
 
 const inter = Inter({subsets: ['latin']})
 
-export default function ClientById({state, dispatch}: PageProps) {
+export default function EditClientById({state, dispatch}: PageProps) {
 
     const router = useRouter()
     const {id} = router.query
@@ -46,6 +46,7 @@ export default function ClientById({state, dispatch}: PageProps) {
             <main
                 className={styles.main}
             >
+                {/*TODO aici vom crea un formular pentru modificarea paginii.*/}
                 {
                     client ? (
                         <div className={styles.clientItem} >
